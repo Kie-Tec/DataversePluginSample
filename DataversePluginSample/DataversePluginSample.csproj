@@ -120,6 +120,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Entities\kietec_item.cs" />
+    <Compile Include="Models\Entities\kietec_resultado.cs" />
+    <Compile Include="Models\EntityOptionSetEnum.cs" />
+    <Compile Include="Models\OrgContext.cs" />
     <Compile Include="SumValuesPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -127,6 +131,9 @@
     <None Include="App.config" />
     <None Include="Consultoria Kie-Tec.snk" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\builderSettings.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

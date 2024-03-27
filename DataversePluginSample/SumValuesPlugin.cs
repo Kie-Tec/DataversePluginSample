@@ -3,6 +3,7 @@ using System.Linq;
 using System.ServiceModel;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using DataversePluginSample.Model;
 
 namespace DataversePluginSample
 {
@@ -30,15 +31,15 @@ namespace DataversePluginSample
                 try
                 {
                     // Plug-in business logic goes here.
-                    var queryInput = new QueryExpression("kietec_item")
+                    var queryInput = new QueryExpression(kietec_Item.EntityLogicalName)
                     {
-                        ColumnSet = new ColumnSet("kietec_valor")
+                        ColumnSet = new ColumnSet(kietec_Item.Fields.kietec_Valor)
                     };
                     
                     tracingService.Trace("Get all rows from input table");
                     EntityCollection inputs = service.RetrieveMultiple(queryInput); 
                         
-                    var queryOutput = new QueryExpression("kietec_resultado")
+                    var queryOutput = new QueryExpression(kietec_Resultado.EntityLogicalName)
                     {
                         TopCount = 1
                     };
@@ -47,9 +48,9 @@ namespace DataversePluginSample
                     Entity outputEntity = (Entity) service.RetrieveMultiple(queryOutput).Entities.First();
 
 
-                    double sumFinal = inputs.Entities.ToList().Sum(x => Convert.ToDouble(x["kietec_valor"]));
+                    double sumFinal = inputs.Entities.ToList().Sum(x => Convert.ToDouble(x[kietec_Item.Fields.kietec_Valor]));
 
-                    outputEntity["kietec_resultadofinal"] = sumFinal;
+                    outputEntity[kietec_Resultado.Fields.kietec_ResultadoFinal] = sumFinal;
 
                     service.Update(outputEntity);
                 }
